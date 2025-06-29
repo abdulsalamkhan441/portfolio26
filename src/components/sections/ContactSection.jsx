@@ -27,7 +27,7 @@ export default function ContactSection() {
           formRef.current.reset();
         },
         (error) => {
-          alert("❌ Failed to send message. " + error.text);
+          alert("❌ Failed to send message. " , error);
         }
       );
   };
