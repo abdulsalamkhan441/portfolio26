@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import picture1 from "../../assets/picture1.svg";
+import picture1 from "../../assets/mypic.png";
 
 export default function AboutSection() {
   const [canScroll, setCanScroll] = useState(false);
@@ -22,11 +22,11 @@ export default function AboutSection() {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
           className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0"
         >
-          <div className="w-[70%] xs:w-[60%] sm:w-[50%] md:w-[80%] aspect-square rounded-md flex items-center justify-center overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+          <div className="flex items-center justify-center overflow-hidden">
             <img
               src={picture1}
               alt="Profile"
-              className="object-cover w-full h-full"
+              className="object-cover w-full h-full rounded-xl shadow-[0_0_40px_rgba(255,255,255,0.2)] ring-4_]()"
               loading="lazy"
             />
           </div>
