@@ -1,8 +1,8 @@
 import './App.css'
 import LandingPage from './pages/Landingpage'
 import CardPage1 from './pages/cardpage1'
-import CardPage2 from './pages/cardpage2'
-import CardPage3 from './pages/cardpage3'
+import CardPage2 from './pages/cardPage2'
+import CardPage3 from './pages/cardPage3'
 import { Routes, Route } from 'react-router-dom'
 
 function App() {
