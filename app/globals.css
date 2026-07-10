@@ -1,26 +1,171 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* New Color Palette */
+  --clr-midnight-navy: #000000; /* Main background */
+  --clr-deep-blue: #041A53;     /* Secondary background */
+  --clr-true-black: #000000;    /* Base and shadow tone */
+  --clr-electric-blue: #0059FF; /* Accent and button color */
+  --clr-pure-white: #FFFFFF;    /* Text and highlights */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Semantic Colors */
+  --color-bg: var(--clr-midnight-navy);
+  --color-bg-deep: var(--clr-true-black);
+  --color-bg-elevated: var(--clr-deep-blue);
+  --color-surface: rgba(0, 89, 255, 0.1); /* Based on Electric Blue */
+  --color-border: rgba(0, 89, 255, 0.2);  /* Based on Electric Blue */
+  --color-text: var(--clr-pure-white);
+  --color-text-muted: rgba(255, 255, 255, 0.6); /* Muted white */
+  --color-accent: var(--clr-electric-blue);
+  --color-accent-soft: rgba(0, 89, 255, 0.1);
+  --color-accent-soft-strong: rgba(0, 89, 255, 0.15);
+  --color-accent-mid: rgba(0, 89, 255, 0.25);
+  --clr-grid-line-accent: rgba(255, 255, 255, 0.05); /* Based on Pure White */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+  SECTION UTILITIES
+  We can replace all the individual `.ab-root`, `.ex-root` etc.
+  with these two classes.
+*/
+.section-root {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: var(--clr-void);
+  color: var(--clr-sand);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  box-sizing: border-box;
+}
+
+.section-root * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.global-layout-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-size: 48px 48px;
+  /* Configures a fallback color value if custom overrides aren't specified */
+  --grid-color: rgba(167, 158, 156, 0.03);
+  
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+}
+
+.section-inner {
+  position: relative;
+  z-index: 2;
+  padding: 100px 6%;
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+}
+
+/*
+  GRID BACKGROUND
+  A single class for the grid overlay used in most sections.
+*/
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--clr-grid-line-accent) 1px, transparent 1px),
+    linear-gradient(90deg, var(--clr-grid-line-accent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/*
+  SEPARATOR
+  For the horizontal line between sections.
+*/
+.section-separator {
+  position: absolute;
+  top: 0;
+  left: 6%;
+  right: 6%;
+  height: 0.5px;
+  background: linear-gradient(to right, transparent, var(--clr-slate-gray), transparent);
+}
+
+/*
+  COMMON HEADER ELEMENTS
+  For the eyebrow, title, etc. found in most sections.
+*/
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 600px;
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-surface);
+  border: 0.5px solid var(--color-border);
+  border-radius: 20px;
+  padding: 5px 14px;
+  width: fit-content;
+}
+
+.section-eyebrow-line {
+  width: 18px;
+  height: 1.5px;
+  background: var(--color-accent);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.section-eyebrow-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.section-title {
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+}
+
+.section-title-accent {
+  background: linear-gradient(90deg, var(--color-accent), var(--color-text));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Responsive adjustments for section-inner */
+@media (max-width: 540px) {
+  .section-inner {
+    padding: 64px 5%;
+    gap: 48px;
+  }
 }
