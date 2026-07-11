@@ -1,9 +1,0 @@
-@import "tailwindcss";
-
-.animate-glow:hover {
-    animation: glow 2s infinite ease-in-out;
-  }
-
-  html {
-  scroll-behavior: smooth;
-}
