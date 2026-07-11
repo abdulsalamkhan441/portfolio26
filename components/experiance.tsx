@@ -33,7 +33,7 @@ export default function ExperienceSection() {
   return (
     <>
       <style>{`
-        @import url('https
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         .ex-root {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -60,7 +60,7 @@ export default function ExperienceSection() {
           display: flex; flex-direction: column; gap: 80px;
         }
 
-        
+        /* --- HARDWARE-ACCELERATED TRANSITION ENGINE --- */
         .ex-animate-in {
           opacity: 0;
           transform: translateY(20px);
@@ -109,7 +109,7 @@ export default function ExperienceSection() {
           text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 28px;
         }
 
-        
+        /* Timeline and Track Customization */
         .ex-timeline { display: flex; flex-direction: column; }
 
         .ex-timeline-item { display: flex; gap: 24px; padding-bottom: 36px; }
@@ -156,7 +156,7 @@ export default function ExperienceSection() {
         .ex-timeline-period { font-size: 11px; color: var(--color-text-muted, #8a8f98); margin: 4px 0 10px; }
         .ex-timeline-desc { font-size: 14px; color: var(--color-text-muted, #8a8f98); line-height: 1.7; }
 
-        
+        /* Value Cards Layout Optimization */
         .ex-values-col { display: flex; flex-direction: column; gap: 14px; }
 
         .ex-value-card {
@@ -215,7 +215,7 @@ export default function ExperienceSection() {
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        
+        /* --- RESPONSIVE MEDIA BREAKPOINTS --- */
         @media (max-width: 1024px) {
           .ex-cols { gap: 48px; }
         }

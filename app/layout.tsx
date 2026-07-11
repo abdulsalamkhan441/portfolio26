@@ -29,7 +29,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col relative isolation:isolate">
-        {/* <ElectricGrid sparkColor="#ffffff" /> */}
+        <ElectricGrid sparkColor="#ffffff" />
         <LegalHeroSection />
         <AboutSection/>
         <ExperienceSection/>

@@ -12,7 +12,6 @@ export default function HeroSection() {
     { label: "Services", href: "#services" },
     { label: "Contact", href: "#contact" },
   ];
- 
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -34,9 +33,6 @@ export default function HeroSection() {
     return () => io.disconnect();
   }, []);
 
- 
- 
- 
   useEffect(() => {
     const canvas = canvasRef.current;
     const container = rightRef.current;
@@ -49,11 +45,9 @@ export default function HeroSection() {
     let height = 0;
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
 
-   
     const LOGOS = [
       {
-       
-        svg: `<svg width="800px" height="800px" viewBox="0 0 16 16" fill="none" xmlns="http
+        svg: `<svg width="800px" height="800px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="nonzero" clip-rule="nonzero" d="M4.84989 2.37195C4.59895 2.51683 4.33488 2.91636 4.30424 3.78785C4.28968 4.20181 3.9423 4.52559 3.52835 4.51103C3.11439 4.49647 2.79061 4.1491 2.80516 3.73514C2.84273 2.66673 3.1806 1.60366 4.09989 1.07291C5.02179 0.540653 6.11484 0.782356 7.06128 1.28727C7.42674 1.48224 7.56495 1.93656 7.36998 2.30201C7.17501 2.66747 6.72069 2.80568 6.35524 2.61072C5.5818 2.1981 5.10158 2.22663 4.84989 2.37195ZM8.87139 3.67284C9.19036 3.40858 9.66315 3.45293 9.92741 3.7719C10.4818 4.44103 11.0136 5.20405 11.4963 6.04018C12.5366 7.84191 13.178 9.68785 13.3509 11.2362C13.4372 12.0091 13.4108 12.7446 13.2303 13.3754C13.0484 14.011 12.6941 14.5863 12.0999 14.9293C11.381 15.3444 10.5509 15.2855 9.79114 15.0089C9.02868 14.7313 8.24395 14.2056 7.49586 13.5228C7.18993 13.2435 7.16831 12.7691 7.44756 12.4632C7.72681 12.1573 8.20119 12.1356 8.50712 12.4149C9.16624 13.0165 9.78567 13.4105 10.3043 13.5994C10.8257 13.7892 11.1537 13.7436 11.3499 13.6303C11.5143 13.5354 11.6797 13.342 11.7882 12.9627C11.8981 12.5787 11.9328 12.0529 11.8602 11.4026C11.7152 10.1045 11.1591 8.45607 10.1973 6.79018C9.75492 6.02396 9.27081 5.33055 8.77232 4.72886C8.50807 4.40989 8.55242 3.93709 8.87139 3.67284Z" fill="#000000"/>
         <path fill-rule="nonzero" clip-rule="nonzero" d="M14.5 8.20557C14.5 7.91581 14.286 7.48735 13.5466 7.02507C13.1954 6.80549 13.0887 6.34276 13.3083 5.99154C13.5279 5.64032 13.9906 5.53361 14.3418 5.75319C15.2483 6.31993 16 7.14407 16 8.20557C16 9.27009 15.2442 10.0958 14.3337 10.663C13.9821 10.882 13.5195 10.7746 13.3005 10.423C13.0815 10.0714 13.189 9.60887 13.5405 9.38985C14.2846 8.92635 14.5 8.4962 14.5 8.20557ZM11.3626 11.0378C11.432 11.4462 11.1572 11.8335 10.7488 11.9029C9.89219 12.0484 8.96547 12.1274 8 12.1274C5.91954 12.1274 4.00018 11.76 2.57286 11.1355C1.86032 10.8238 1.23659 10.4332 0.780529 9.9615C0.320977 9.48616 0 8.89166 0 8.20557C0 7.37549 0.466082 6.68599 1.08548 6.16636C1.70712 5.64485 2.55471 5.22808 3.52013 4.92164C3.91494 4.79633 4.33657 5.01479 4.46189 5.40959C4.5872 5.80439 4.36874 6.22603 3.97394 6.35135C3.12334 6.62134 2.4724 6.96078 2.04954 7.31553C1.62442 7.67217 1.5 7.97899 1.5 8.20557C1.5 8.39536 1.58476 8.6353 1.85895 8.91891C2.13663 9.20613 2.57464 9.49905 3.17409 9.76131C4.37076 10.2848 6.07639 10.6274 8 10.6274C8.88475 10.6274 9.72732 10.5549 10.4976 10.424C10.906 10.3547 11.2933 10.6295 11.3626 11.0378Z" fill="#000000"/>
         <path fill-rule="nonzero" clip-rule="nonzero" d="M4.87192 13.6303C5.12286 13.7752 5.6009 13.8041 6.37095 13.3949C6.73673 13.2005 7.19082 13.3395 7.38519 13.7052C7.57957 14.071 7.44062 14.5251 7.07484 14.7195C6.13079 15.2211 5.04121 15.4601 4.12192 14.9293C3.20003 14.3971 2.86282 13.3296 2.82687 12.2575C2.81299 11.8435 3.13733 11.4967 3.55131 11.4828C3.96529 11.4689 4.31215 11.7932 4.32603 12.2072C4.35541 13.0834 4.62023 13.485 4.87192 13.6303ZM3.98778 9.49712C3.59944 9.35301 3.40145 8.92138 3.54556 8.53304C3.84786 7.71839 4.24274 6.8763 4.72548 6.04018C5.76571 4.23845 7.04361 2.75996 8.29806 1.83609C8.92431 1.37487 9.57441 1.02999 10.211 0.870901C10.8524 0.71059 11.5278 0.729863 12.1219 1.07291C12.8408 1.48795 13.2049 2.23634 13.3452 3.03257C13.486 3.83168 13.4232 4.77409 13.2058 5.7634C13.1169 6.16796 12.7169 6.42388 12.3124 6.33501C11.9078 6.24613 11.6519 5.84612 11.7408 5.44155C11.9322 4.56992 11.9637 3.83647 11.868 3.29288C11.7717 2.7464 11.5681 2.48524 11.3719 2.37195C11.2076 2.27705 10.9574 2.23049 10.5747 2.32614C10.1871 2.42301 9.71442 2.65588 9.18757 3.04388C8.13584 3.81846 6.98632 5.12428 6.02452 6.79018C5.58214 7.55639 5.22369 8.32235 4.95185 9.0549C4.80774 9.44323 4.37611 9.64122 3.98778 9.49712Z" fill="#000000"/>
@@ -62,33 +56,28 @@ export default function HeroSection() {
         scale: 2.8,
       },
       {
-       
-        svg: `<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http
+        svg: `<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none"><title>file_type_vite</title><path d="M29.8836 6.146L16.7418 29.6457c-.2714.4851-.9684.488-1.2439.0052L2.0956 6.1482c-.3-.5262.1498-1.1635.746-1.057l13.156 2.3516a.7144.7144 0 00.2537-.0004l12.8808-2.3478c.5942-.1083 1.0463.5241.7515 1.0513z" fill="url(#paint0_linear)"/><path d="M22.2644 2.0069l-9.7253 1.9056a.3571.3571 0 00-.2879.3294l-.5982 10.1038c-.014.238.2045.4227.4367.3691l2.7077-.6248c.2534-.0585.4823.1647.4302.4194l-.8044 3.9393c-.0542.265.1947.4918.4536.4132l1.6724-.5082c.2593-.0787.5084.1487.4536.414l-1.2784 6.1877c-.08.387.4348.598.6495.2662L16.5173 25 24.442 9.1848c.1327-.2648-.096-.5667-.387-.5106l-2.787.5379c-.262.0505-.4848-.1934-.4109-.4497l1.8191-6.306c.074-.2568-.1496-.5009-.4118-.4495z" fill="url(#paint1_linear)"/><defs id="defs50"><linearGradient id="paint0_linear" x1="6.0002" y1="32.9999" x2="235" y2="344" gradientUnits="userSpaceOnUse" gradientTransform="matrix(.07142 0 0 .07142 1.3398 1.8944)"><stop stop-color="#41D1FF" id="stop38"/><stop offset="1" stop-color="#BD34FE" id="stop40"/></linearGradient><linearGradient id="paint1_linear" x1="194.651" y1="8.8182" x2="236.076" y2="292.989" gradientUnits="userSpaceOnUse" gradientTransform="matrix(.07142 0 0 .07142 1.3398 1.8944)"><stop stop-color="#FFEA83" id="stop43"/><stop offset=".0833" stop-color="#FFDD35" id="stop45"/><stop offset="1" stop-color="#FFA800" id="stop47"/></linearGradient></defs></svg>`,
         scale: 2.8,
       },
       {
-       
-        svg: `<svg fill="#000000" width="800px" height="800px" viewBox="0 0 32 32" xmlns="http
+        svg: `<svg fill="#000000" width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
         <path d="M23.749 30.005c-0.119 0.063-0.109 0.083 0.005 0.025 0.037-0.015 0.068-0.036 0.095-0.061 0-0.021 0-0.021-0.1 0.036zM23.989 29.875c-0.057 0.047-0.057 0.047 0.011 0.016 0.036-0.021 0.068-0.041 0.068-0.047 0-0.027-0.016-0.021-0.079 0.031zM24.145 29.781c-0.057 0.047-0.057 0.047 0.011 0.016 0.037-0.021 0.068-0.043 0.068-0.048 0-0.025-0.016-0.020-0.079 0.032zM24.303 29.688c-0.057 0.047-0.057 0.047 0.009 0.015 0.037-0.020 0.068-0.041 0.068-0.047 0-0.025-0.016-0.020-0.077 0.032zM24.516 29.547c-0.109 0.073-0.147 0.12-0.047 0.068 0.067-0.041 0.181-0.131 0.161-0.131-0.043 0.016-0.079 0.043-0.115 0.063zM14.953 0.011c-0.073 0.005-0.292 0.025-0.484 0.041-4.548 0.412-8.803 2.86-11.5 6.631-1.491 2.067-2.459 4.468-2.824 6.989-0.129 0.88-0.145 1.14-0.145 2.333 0 1.192 0.016 1.448 0.145 2.328 0.871 6.011 5.147 11.057 10.943 12.927 1.043 0.333 2.136 0.563 3.381 0.704 0.484 0.052 2.577 0.052 3.061 0 2.152-0.24 3.969-0.771 5.767-1.688 0.276-0.14 0.328-0.177 0.291-0.208-0.88-1.161-1.744-2.323-2.609-3.495l-2.557-3.453-3.203-4.745c-1.068-1.588-2.14-3.172-3.229-4.744-0.011 0-0.025 2.109-0.031 4.681-0.011 4.505-0.011 4.688-0.068 4.792-0.057 0.125-0.151 0.229-0.276 0.287-0.099 0.047-0.188 0.057-0.661 0.057h-0.541l-0.141-0.088c-0.088-0.057-0.161-0.136-0.208-0.229l-0.068-0.141 0.005-6.271 0.011-6.271 0.099-0.125c0.063-0.077 0.141-0.14 0.229-0.187 0.131-0.063 0.183-0.073 0.724-0.073 0.635 0 0.74 0.025 0.907 0.208 1.296 1.932 2.588 3.869 3.859 5.812 2.079 3.152 4.917 7.453 6.312 9.563l2.537 3.839 0.125-0.083c1.219-0.813 2.328-1.781 3.285-2.885 2.016-2.308 3.324-5.147 3.767-8.177 0.129-0.88 0.145-1.141 0.145-2.333 0-1.193-0.016-1.448-0.145-2.328-0.871-6.011-5.147-11.057-10.943-12.928-1.084-0.343-2.199-0.577-3.328-0.697-0.303-0.031-2.371-0.068-2.631-0.041zM21.5 9.688c0.151 0.072 0.265 0.208 0.317 0.364 0.027 0.084 0.032 1.823 0.027 5.74l-0.011 5.624-0.989-1.52-0.995-1.521v-4.083c0-2.647 0.011-4.131 0.025-4.204 0.047-0.167 0.161-0.307 0.313-0.395 0.124-0.063 0.172-0.068 0.667-0.068 0.463 0 0.541 0.005 0.645 0.063z"/>
         </svg>`,
         scale: 2.8,
       },
       {
-       
-        svg: `<svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http
+        svg: `<svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 3H9C7.34315 3 6 4.34315 6 6C6 7.65685 7.34315 9 9 9M12 3V9M12 3H15C16.6569 3 18 4.34315 18 6C18 7.65685 16.6569 9 15 9M12 9H9M12 9H15M12 9V15M9 9C7.34315 9 6 10.3431 6 12C6 13.6569 7.34315 15 9 15M15 9C16.6569 9 18 10.3431 18 12C18 13.6569 16.6569 15 15 15C13.3431 15 12 13.6569 12 12C12 10.3431 13.3431 9 15 9ZM12 15H9M12 15V18C12 19.6569 10.6569 21 9 21C7.34315 21 6 19.6569 6 18C6 16.3431 7.34315 15 9 15" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>`,
         scale: 2.8,
       },
       {
-       
-        svg: `<svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http
+        svg: `<svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 15.5V22.5L5 15.5M5 15.5V8.5H12M5 15.5H19L12 8.5M12 8.5H19V1.5H5L12 8.5Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>`,
         scale: 2.8,
       },
       {
-       
         svg: `<svg width="800px" height="800px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     
     <title>github [#142]</title>
@@ -109,20 +98,16 @@ export default function HeroSection() {
         scale: 2.8,
       },
       {
-       
-        svg: `<svg fill="#000000" width="800px" height="800px" viewBox="0 0 24 24" xmlns="http
+        svg: `<svg fill="#000000" width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xml:space="preserve"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 6.036c-2.667 0-4.333 1.325-5 3.976 1-1.325 2.167-1.822 3.5-1.491.761.189 1.305.738 1.906 1.345C13.387 10.855 14.522 12 17 12c2.667 0 4.333-1.325 5-3.976-1 1.325-2.166 1.822-3.5 1.491-.761-.189-1.305-.738-1.907-1.345-.98-.99-2.114-2.134-4.593-2.134zM7 12c-2.667 0-4.333 1.325-5 3.976 1-1.326 2.167-1.822 3.5-1.491.761.189 1.305.738 1.907 1.345.98.989 2.115 2.134 4.594 2.134 2.667 0 4.333-1.325 5-3.976-1 1.325-2.167 1.822-3.5 1.491-.761-.189-1.305-.738-1.906-1.345C10.613 13.145 9.478 12 7 12z"/></svg>`,
         scale: 2.8,
       },
     ];
     let currentWordIndex = 0;
     let targetPoints: { x: number; y: number }[] = [];
-   
 
     const particles: Mote[] = [];
-   
     const getTargetCount = () => targetPoints.length;
 
-   
     let baseRadius = 0;
     let centerX = 0;
     let centerY = 0;
@@ -136,15 +121,14 @@ export default function HeroSection() {
     };
 
     const colors = [
-      "0, 89, 255",
-      "59, 130, 246",
-      "167, 243, 208",
-      "96, 165, 250",
-      "226, 232, 240",
-      "74, 39, 119",
+      "0, 89, 255", // Vivid Accent Blue
+      "59, 130, 246", // Mid Blue
+      "167, 243, 208", // Soft Emerald Mint
+      "96, 165, 250", // Sky Highlights
+      "226, 232, 240", // Pale Dust
+      "74, 39, 119", // Deep Indigo Glow (new)
     ];
 
-   
     const getPointsFromSVG = (svg: string, scale: number) => {
       const size = 220;
 
@@ -187,21 +171,21 @@ export default function HeroSection() {
     };
 
     class Mote {
-     
+      // --- Reworked properties for target-based movement ---
       x: number;
       y: number;
       vx = 0;
       vy = 0;
       targetX: number;
       targetY: number;
-     
+      // --- End reworked properties ---
 
       size: number;
       color: string;
       alpha: number;
 
       constructor() {
-       
+        // Start particles at a random position
         this.x = Math.random() * width;
         this.y = Math.random() * height;
         this.targetX = this.x;
@@ -213,14 +197,14 @@ export default function HeroSection() {
       }
 
       update() {
-       
-        const spring = 0.03;
-        const friction = 0.85;
+        // --- New spring-based animation logic ---
+        const spring = 0.03; // How strongly particles are pulled to their target
+        const friction = 0.85; // Damping to prevent overshooting
 
         let targetX = this.targetX;
         let targetY = this.targetY;
 
-       
+        // Mouse interaction: push particles away
         if (mouse.active) {
           const dx = this.x - mouse.x;
           const dy = this.y - mouse.y;
@@ -228,24 +212,24 @@ export default function HeroSection() {
           const hoverRadius = 110;
           if (dist < hoverRadius) {
             const force = (hoverRadius - dist) / hoverRadius;
-            const pushX = (dx / dist) * force * 40;
+            const pushX = (dx / dist) * force * 40; // Increased push force
             const pushY = (dy / dist) * force * 40;
             targetX += pushX;
             targetY += pushY;
           }
         }
 
-       
+        // Move towards the target (either the text point or pushed-away point)
         this.vx += (targetX - this.x) * spring;
         this.vy += (targetY - this.y) * spring;
         this.vx *= friction;
         this.vy *= friction;
         this.x += this.vx;
         this.y += this.vy;
-       
+        // --- End new animation logic ---
       }
 
-     
+      // No longer need edgeFade
 
       draw(context: CanvasRenderingContext2D) {
         const a = this.alpha;
@@ -263,9 +247,9 @@ export default function HeroSection() {
         if (i < shuffledPoints.length) {
           particles[i].targetX = shuffledPoints[i].x;
           particles[i].targetY = shuffledPoints[i].y;
-          particles[i].alpha = Math.random() * 0.5 + 0.35;
+          particles[i].alpha = Math.random() * 0.5 + 0.35; // Make visible
         } else {
-         
+          // Hide extra particles if the new shape is smaller
           particles[i].targetX = centerX;
           particles[i].targetY = centerY;
           particles[i].alpha = 0;
@@ -278,7 +262,7 @@ export default function HeroSection() {
       targetPoints = await getPointsFromSVG(logo.svg, logo.scale);
       const numParticles = Math.max(particles.length, getTargetCount());
       while (particles.length < numParticles) particles.push(new Mote());
-      particles.length = numParticles;
+      particles.length = numParticles; // Trim if needed
       assignTargets();
     };
 
@@ -301,14 +285,14 @@ export default function HeroSection() {
     const ro = new ResizeObserver(() => setCanvasSize());
     ro.observe(container);
 
-   
+    // --- New logic for word transitions ---
     const transitionInterval = setInterval(async () => {
       currentWordIndex = (currentWordIndex + 1) % LOGOS.length;
       const logo = LOGOS[currentWordIndex];
       targetPoints = await getPointsFromSVG(logo.svg, logo.scale);
       assignTargets();
-    }, 4000);
-   
+    }, 4000); // Change word every 4 seconds
+    // --- End new logic ---
 
     const render = () => {
       if (width && height) {
@@ -357,7 +341,7 @@ export default function HeroSection() {
   return (
     <>
       <style>{`
-        @import url('https
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         .hero-root {
           min-height: 100vh;
@@ -376,7 +360,8 @@ export default function HeroSection() {
           padding: 0;
         }
 
-        
+        /* Particle canvas confined to the hero-right column, sitting
+           behind the floating cards (z-index 20) but above the base layer */
         .hero-global-canvas {
           position: absolute;
           inset: 0;
@@ -545,7 +530,7 @@ export default function HeroSection() {
           filter: brightness(1.1);
         }
 
-        
+        /* ── Core layout setup ── */
         .hero-body {
           flex: 1;
           display: flex;
@@ -711,7 +696,7 @@ export default function HeroSection() {
           border-color: var(--color-accent);
         }
 
-        
+        /* ── Right setup configuration ── */
         .hero-right {
           flex: 1.15;
           display: flex;
@@ -831,7 +816,7 @@ export default function HeroSection() {
           font-style: italic;
         }
 
-        
+        /* ── Responsive logic adjustments ── */
         @media (max-width: 1024px) {
           .hero-body { gap: 30px; }
           .hero-badge-served { right: 0%; }
@@ -875,6 +860,7 @@ export default function HeroSection() {
         <div className="hero-glow hero-glow-a" aria-hidden="true" />
         <div className="hero-glow hero-glow-b" aria-hidden="true" />
 
+        {/* Navigation */}
         <nav className="hero-nav" data-reveal>
           <div className="hero-nav-logo">
             <div className="hero-nav-logomark" aria-hidden="true">
@@ -899,6 +885,7 @@ export default function HeroSection() {
         </nav>
 
         <div className="hero-body">
+          {/* Left Side Content Stack */}
           <div className="hero-left" data-reveal>
             <div
               className="section-eyebrow"
@@ -940,9 +927,9 @@ export default function HeroSection() {
             </div>
 
             <div className="hero-btns">
-              <button href="#stky-root" className="hero-btn-primary">
+              <a href="#stky-root" className="hero-btn-primary">
                 Explore My Projects
-              </button>
+              </a>
               <a href="/resume.pdf" download="Abdul_Salam_Resume.docx">
                 <button className="hero-btn-secondary">Download Resume</button>
               </a>

@@ -34,7 +34,7 @@ export default function AboutSection() {
   return (
     <>
       <style>{`
-        @import url('https
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         .ab-root {
           width: 100%;
@@ -54,7 +54,6 @@ export default function AboutSection() {
           display: flex; flex-direction: column; gap: 72px;
         }
 
-        
         .ab-animate-in {
           opacity: 0;
           transform: translateY(24px);
@@ -68,7 +67,6 @@ export default function AboutSection() {
           transform: translateY(0);
         }
 
-        
         .ab-header { display: flex; flex-direction: column; gap: 14px; max-width: 700px; }
 
         .ab-eyebrow {
@@ -95,7 +93,6 @@ export default function AboutSection() {
           -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
 
-        
         .ab-cols { 
           display: grid; 
           grid-template-columns: minmax(320px, 420px) 1fr; 
@@ -103,7 +100,6 @@ export default function AboutSection() {
           align-items: start; 
         }
 
-        
         .ab-left { display: flex; flex-direction: column; gap: 32px; }
 
         .ab-portrait-wrap {
@@ -164,7 +160,7 @@ export default function AboutSection() {
         .ab-btn-ghost { background: transparent; color: var(--color-text, #ffffff); border: 0.5px solid var(--color-border, rgba(255,255,255,0.15)); }
         .ab-btn-ghost:hover { border-color: var(--color-accent, #00f0ff); color: var(--color-accent, #00f0ff); background: rgba(0, 240, 255, 0.02); }
 
-        
+        /* Right Side Column */
         .ab-right { display: flex; flex-direction: column; gap: 48px; }
 
         .ab-section-label {
@@ -209,8 +205,6 @@ export default function AboutSection() {
           border: 0.5px solid var(--color-border-strong, rgba(255,255,255,0.08));
           border-radius: 5px; padding: 3px 8px;
         }
-
-        
         .ab-stat-row { 
           display: grid; 
           grid-template-columns: repeat(3, 1fr); 
@@ -241,14 +235,12 @@ export default function AboutSection() {
         .ab-stat-num { font-size: clamp(24px, 3.5vw, 32px); font-weight: 800; color: var(--color-accent, #00f0ff); letter-spacing: -0.04em; line-height: 1; }
         .ab-stat-lbl { font-size: 12px; color: var(--color-text-muted, #8a8f98); line-height: 1.4; }
 
-        
         .ab-delay-1 { transition-delay: 0.1s; }
         .ab-delay-2 { transition-delay: 0.2s; }
         .ab-delay-3 { transition-delay: 0.3s; }
         .ab-delay-4 { transition-delay: 0.4s; }
         .ab-delay-5 { transition-delay: 0.5s; }
 
-        
         @media (prefers-reduced-motion: reduce) {
           .ab-animate-in {
             opacity: 1 !important;
@@ -260,7 +252,6 @@ export default function AboutSection() {
           .ab-portrait-wrap:hover .ab-portrait-br { transform: none !important; }
         }
 
-        
         @media (max-width: 1024px) {
           .ab-cols { gap: 48px; }
         }
@@ -323,7 +314,7 @@ export default function AboutSection() {
                     View Projects
                   </a>
                   <a
-                    href="https
+                    href="https://github.com/abdulsalamkhan441"
                     className="ab-btn ab-btn-ghost"
                     target="_blank"
                     rel="noopener noreferrer"

@@ -9,7 +9,7 @@ const PROJECTS = [
     title: "MOVIONZ",
     desc: "A responsive movie browsing app that allows users to explore trending films, view details, and discover new content. Built using React and Tailwind CSS with a dynamic UI and external movie API integration.",
     image: "/5p.png",
-    link: "https
+    link: "https://movionz.netlify.app/",
   },
   {
     num: "02",
@@ -17,7 +17,7 @@ const PROJECTS = [
     title: "Spirit-1-taekwondo",
     desc: "Spirit 1 Taekwondo empowers students with disciplined training, modern instruction, and a supportive community.Built with React and Tailwind, the site delivers a fast, clean, and accessible experience for every visitor.",
     image: "/1p.png",
-    link: "https
+    link: "https://spirit1tkd.netlify.app/",
   },
   {
     num: "03",
@@ -25,7 +25,7 @@ const PROJECTS = [
     title: "NorthPoint Construction",
     desc: "A clean and responsive website for a fictional construction company. Designed to showcase services, portfolio, and contact information with a professional layout and smooth user experience.",
     image: "/3p.png",
-    link: "https
+    link: "https://askweb9.netlify.app/",
   },
   {
     num: "04",
@@ -33,7 +33,7 @@ const PROJECTS = [
     title: "Furniro",
     desc: "A sleek and responsive ecommerce web app built with React and Tailwind CSS. Includes product listing, shopping cart with localStorage, and smooth user interactions.",
     image: "/4p.png",
-    link: "https
+    link: "https://askweb10.netlify.app/",
   },
   {
     num: "05",
@@ -41,7 +41,7 @@ const PROJECTS = [
     title: "Innovative global trading",
     desc: "Developed a sleek, professional business website for IGI using React and Tailwind CSS to enhance brand credibility. The site delivers a fast, responsive, and modern corporate experience with clear sections for services, company details, testimonials, and contact.",
     image: "/2p.png",
-    link: "https
+    link: "https://askweb8.netlify.app/",
   },
 ];
 
@@ -61,7 +61,7 @@ export default function StickyComponent() {
       },
       { 
         root: null, 
-       
+        // Generous top/bottom boundaries ensuring a panel is always captured while crossing the screen
         rootMargin: "-20% 0px -60% 0px", 
         threshold: 0 
       }
@@ -76,7 +76,7 @@ export default function StickyComponent() {
     if (targetPanel) {
       targetPanel.scrollIntoView({
         behavior: "smooth",
-        block: "center",
+        block: "center", // Keeps the clicked element centered cleanly in the view viewport
       });
     }
   };
@@ -84,7 +84,7 @@ export default function StickyComponent() {
   return (
     <>
       <style>{`
-        @import url('https
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         .stky-root {
           background: var(--color-bg);
@@ -104,7 +104,7 @@ export default function StickyComponent() {
           z-index: 1;
         }
 
-        
+        /* ==================== LEFT SIDE (STICKY) ==================== */
         .sticky {
           height: 100vh;
           position: sticky;
@@ -143,7 +143,7 @@ export default function StickyComponent() {
           border-radius: 8px;
           color: var(--color-text-muted);
           transition: background 0.35s ease, color 0.35s ease;
-          cursor: pointer; 
+          cursor: pointer; /* Changed to pointer since it's now clickable */
           background: none;
           border: none;
           width: 100%;
@@ -187,7 +187,7 @@ export default function StickyComponent() {
           width: 20px;
         }
 
-        
+        /* ==================== RIGHT SIDE (SCROLLABLE CARDS) ==================== */
         .content {
           padding: 4rem;
           display: flex;
@@ -199,7 +199,7 @@ export default function StickyComponent() {
         .panel {
           display: flex;
           align-items: center;
-          min-height: 70vh; 
+          min-height: 70vh; /* Gives the panels breathing room to trigger bounds properly */
         }
 
         .project-card {
@@ -364,7 +364,7 @@ export default function StickyComponent() {
           transform: translate(2px, -2px);
         }
 
-        
+        /* ==================== RESPONSIVE ==================== */
         @media (max-width: 1080px) {
           .sticky, .content { padding: 3rem; }
         }

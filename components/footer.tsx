@@ -13,12 +13,12 @@ const SOCIALS = [
   {
     icon: "ti-brand-github",
     label: "GitHub",
-    href: "https
+    href: "https://github.com/abdulsalamkhan441",
   },
   {
     icon: "ti-brand-linkedin",
     label: "LinkedIn",
-    href: "https
+    href: "https://www.linkedin.com/in/abdulsalam-khan-/",
   },
   { icon: "ti-mail", label: "Email", href: "abdulsalamkhanwbd@gmail.com" },
 ];
@@ -51,9 +51,8 @@ export default function FooterSection() {
   return (
     <>
       <style>{`
-        @import url('https
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-        
 
         .ft-root {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -63,7 +62,6 @@ export default function FooterSection() {
           pointer-events: none;
           z-index: 0;
           background-size: 48px 48px;
-          
           --grid-color: rgba(167, 158, 156, 0.03);
   
           background-image:
@@ -105,7 +103,6 @@ export default function FooterSection() {
           50%       { opacity: 0.65; transform: translateX(-50%) scale(1.08); }
         }
 
-        
         .ft-cta {
           position: relative;
           z-index: 1;
@@ -170,7 +167,6 @@ export default function FooterSection() {
         .ft-cta-arrow { transition: transform 0.3s ease; }
         .ft-cta-link:hover .ft-cta-arrow { transform: translate(3px, -3px); }
 
-        
         .ft-bar {
           position: relative;
           z-index: 1;
@@ -243,7 +239,6 @@ export default function FooterSection() {
           pointer-events: none;
           z-index: 0;
           background-size: 48px 48px;
-          
           --grid-color: rgba(167, 158, 156, 0.03);
   
           background-image:
@@ -271,7 +266,6 @@ export default function FooterSection() {
       `}</style>
 
       <footer ref={rootRef} className="ft-root" id="footer" aria-label="Footer">
-        <div className="ft-glow" aria-hidden="true" />
 
         <div className="ft-cta" data-reveal>
           <span className="ft-cta-eyebrow">Got a project in mind?</span>

@@ -48,7 +48,6 @@ function lerp(a: number, b: number, t: number): number {
   return a + (b - a) * t;
 }
 
-
 const hexToRgbCache = new Map<string, [number, number, number]>();
 function hexToRgb(hex: string): [number, number, number] {
   const cached = hexToRgbCache.get(hex);
@@ -71,7 +70,6 @@ function hexToRgb(hex: string): [number, number, number] {
 function rgba(rgb: [number, number, number], alpha: number): string {
   return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${clamp(alpha, 0, 1)})`;
 }
-
 
 function midpointDisplace(
   a: Vec2,
@@ -105,7 +103,6 @@ function generateBoltPath(from: Vec2, to: Vec2, roughness: number, iterations: n
 }
 
 
-
 interface BranchProbabilities {
   straight: number;
   turnLeft: number;
@@ -116,16 +113,16 @@ interface BranchProbabilities {
 
 interface EngineConfig {
   branchProbabilities: BranchProbabilities;
-  branchProbabilityGenerationDecay: number;
+  branchProbabilityGenerationDecay: number; 
   maxSparks: number;
   maxGeneration: number;
-  ambientIgnitionChance: number;
+  ambientIgnitionChance: number; 
   rowScanChance: number;
   columnScanChance: number;
   wholeGridFlashChance: number;
   chainReactionChance: number;
   hoverBurstDelayMs: number;
-  trailFadeAlpha: number;
+  trailFadeAlpha: number; 
 }
 
 const DEFAULT_CONFIG: EngineConfig = {
@@ -149,13 +146,12 @@ const DEFAULT_CONFIG: EngineConfig = {
 };
 
 
-
 class GridNode {
   readonly col: number;
   readonly row: number;
   readonly x: number;
   readonly y: number;
-  glow = 0;
+  glow = 0; 
   pulsePhase: number;
 
   constructor(col: number, row: number, x: number, y: number) {
@@ -179,7 +175,6 @@ class GridNode {
     return this.glow <= 0.01;
   }
 }
-
 
 
 class Particle {
@@ -223,11 +218,10 @@ class Particle {
 }
 
 
-
 interface TrailPoint {
   x: number;
   y: number;
-  age: number;
+  age: number; // ms since recorded
 }
 
 let sparkIdCounter = 0;
@@ -239,21 +233,19 @@ class Spark {
   dir: Direction;
   targetCol: number;
   targetRow: number;
-  progress = 0;
+  progress = 0; 
   speed: number;
   thickness: number;
   generation: number;
   color: string;
   trail: TrailPoint[] = [];
   dead = false;
-  ttlMs: number;
-  isScanner: boolean;
+  ttlMs: number; 
+  isScanner: boolean; 
 
-  
   boltPath: Vec2[] = [];
   private boltRefreshMs = 0;
 
-  
   private flickerValue = 1;
 
   constructor(
@@ -289,7 +281,6 @@ class Spark {
     return { x: this.targetCol * GRID_SIZE, y: this.targetRow * GRID_SIZE };
   }
 
-  
   regenerateBoltPath(): void {
     const roughness = this.isScanner ? 1 : 2.6;
     const iterations = this.isScanner ? 1 : 2;
@@ -297,7 +288,6 @@ class Spark {
     this.boltRefreshMs = randomRange(60, 140);
   }
 
-  
   getTruncatedPath(progress: number): Vec2[] {
     const points = this.boltPath;
     const n = points.length;
@@ -334,12 +324,10 @@ class Spark {
     this.progress += (this.speed * dtMs) / 1000;
     this.ttlMs -= dtMs;
 
-   
     this.flickerValue += (Math.random() - 0.5) * 0.5 * (dtMs / 16.67);
     this.flickerValue = clamp(this.flickerValue, 0.35, 1);
     if (Math.random() < 0.02) this.flickerValue = randomRange(0.15, 0.4);
 
-   
     this.boltRefreshMs -= dtMs;
     if (this.boltRefreshMs <= 0) this.regenerateBoltPath();
 
@@ -357,7 +345,6 @@ class Spark {
 }
 
 
-
 class Renderer {
   private ctx: CanvasRenderingContext2D;
 
@@ -365,14 +352,12 @@ class Renderer {
     this.ctx = ctx;
   }
 
-  
   fadeFrame(width: number, height: number, fadeAlpha: number): void {
     this.ctx.globalCompositeOperation = "source-over";
-    this.ctx.fillStyle = `rgba(13, 14, 18, ${fadeAlpha})`;
+    this.ctx.fillStyle = `rgba(13, 14, 18, ${fadeAlpha})`; // Assumes var(--color-bg) is #0d0e12
     this.ctx.fillRect(0, 0, width, height);
   }
 
-  
   beginAdditivePass(): void {
     this.ctx.globalCompositeOperation = "lighter";
   }
@@ -389,7 +374,6 @@ class Renderer {
     const pulse = 0.9 + 0.1 * Math.sin(node.pulsePhase);
     const radius = 1.4 + node.glow * 4.2 * pulse;
 
-   
     const gradient = this.ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, radius * 1.8);
     gradient.addColorStop(0, rgba(rgb, node.glow * 0.55));
     gradient.addColorStop(0.5, rgba(rgb, node.glow * 0.18));
@@ -399,14 +383,12 @@ class Renderer {
     this.ctx.arc(node.x, node.y, radius * 1.8, 0, Math.PI * 2);
     this.ctx.fill();
 
-   
     this.ctx.fillStyle = rgba([255, 255, 255], Math.min(1, node.glow) * 0.9);
     this.ctx.beginPath();
     this.ctx.arc(node.x, node.y, Math.max(0.4, radius * 0.16), 0, Math.PI * 2);
     this.ctx.fill();
   }
 
-  
   drawBoltPath(points: Vec2[], color: string, thickness: number, alpha: number): void {
     if (points.length < 2 || alpha < 0.01) return;
     const rgb = hexToRgb(color);
@@ -422,20 +404,17 @@ class Renderer {
       for (let i = 1; i < points.length; i++) this.ctx.lineTo(points[i].x, points[i].y);
     };
 
-   
     this.ctx.globalAlpha = clamp(alpha * 0.16, 0, 1);
     this.ctx.strokeStyle = rgba(rgb, 1);
     this.ctx.lineWidth = Math.max(0.5, thickness * 6);
     strokePolyline();
     this.ctx.stroke();
 
-   
     this.ctx.globalAlpha = clamp(alpha * 0.32, 0, 1);
     this.ctx.lineWidth = Math.max(0.4, thickness * 2.4);
     strokePolyline();
     this.ctx.stroke();
 
-   
     const gradient = this.ctx.createLinearGradient(tail.x, tail.y, head.x, head.y);
     gradient.addColorStop(0, rgba(rgb, alpha * 0.7));
     gradient.addColorStop(0.7, rgba(rgb, alpha * 0.9));
@@ -447,10 +426,9 @@ class Renderer {
     this.ctx.lineWidth = Math.max(0.3, thickness * 0.5);
     strokePolyline();
     this.ctx.stroke();
-    this.ctx.shadowBlur = 0;
+    this.ctx.shadowBlur = 0; 
   }
 
-  
   drawSparkTrail(spark: Spark, nowMs: number): void {
     if (spark.trail.length < 2) return;
     const rgb = hexToRgb(spark.color);
@@ -479,7 +457,6 @@ class Renderer {
     this.ctx.fill();
   }
 }
-
 
 
 interface MouseState {
@@ -552,7 +529,6 @@ class ElectricGridEngine {
     };
   }
 
-  
 
   private spawnSpark(
     col: number,
@@ -574,7 +550,6 @@ class ElectricGridEngine {
     }
   }
 
-  
   spawnExplosion(x: number, y: number): void {
     const { col, row } = this.nearestNode(x, y);
     const node = this.getNode(col, row);
@@ -585,8 +560,6 @@ class ElectricGridEngine {
       this.spawnSpark(col, row, dir, 0, 1.4);
     }
 
-   
-   
     const diagonalPairs: [Direction, Direction][] = [
       [0, 1],
       [1, 2],
@@ -594,8 +567,6 @@ class ElectricGridEngine {
       [3, 0],
     ];
     for (const [a] of diagonalPairs) {
-     
-     
       this.spawnSpark(col, row, a, 1, 1.1);
     }
 
@@ -603,7 +574,6 @@ class ElectricGridEngine {
     this.spawnParticlesAt(node.x, node.y, 8, true);
   }
 
-  
   private updateHoverCharge(dtMs: number): void {
     if (!this.mouse.active) return;
     const { col, row } = this.nearestNode(this.mouse.x, this.mouse.y);
@@ -620,11 +590,10 @@ class ElectricGridEngine {
     const hoverDuration = this.nowMs - this.mouse.hoverStartMs;
     if (hoverDuration >= this.config.hoverBurstDelayMs) {
       this.spawnExplosion(node.x, node.y);
-      this.mouse.hoverStartMs = this.nowMs;
+      this.mouse.hoverStartMs = this.nowMs; 
     }
   }
 
-  
 
   private spawnAmbient(): void {
     const cfg = this.config;
@@ -658,14 +627,12 @@ class ElectricGridEngine {
 
   private gridFlashIntensity = 0;
 
-  
 
   private onSparkArrive(spark: Spark): Spark[] {
     const node = this.getNode(spark.targetCol, spark.targetRow);
     node.charge(0.5 + spark.thickness * 0.15);
     this.spawnParticlesAt(node.x, node.y, randomInt(1, 3), false);
 
-   
     if (Math.random() < this.config.chainReactionChance * 0.3) {
       const dir = randomInt(0, 3) as Direction;
       this.spawnSpark(spark.targetCol, spark.targetRow, dir, spark.generation + 1);
@@ -675,7 +642,6 @@ class ElectricGridEngine {
     const col = spark.targetCol;
     const row = spark.targetRow;
 
-   
     if (spark.isScanner) {
       const vec = DIRECTION_VECTORS[spark.dir];
       if (this.inBounds(col + vec.x, row + vec.y)) {
@@ -751,11 +717,9 @@ class ElectricGridEngine {
     let nextDir: Direction = spark.dir;
     if (pick("turnLeft")) nextDir = turnLeft(spark.dir);
     else if (pick("turnRight")) nextDir = turnRight(spark.dir);
-   
 
     const vec = DIRECTION_VECTORS[nextDir];
     if (!this.inBounds(col + vec.x, row + vec.y)) {
-     
       nextDir = oppositeDirection(nextDir);
     }
     const bounceVec = DIRECTION_VECTORS[nextDir];
@@ -774,22 +738,18 @@ class ElectricGridEngine {
     return [spark];
   }
 
-  
 
   update(dtMs: number): void {
     this.nowMs += dtMs;
-    const dt = Math.min(dtMs, 48);
+    const dt = Math.min(dtMs, 48); // clamp huge tab-switch deltas
 
     this.spawnAmbient();
     this.updateHoverCharge(dt);
 
-   
-   
     for (const node of this.nodes.values()) {
       if (!node.isDim()) node.update(dt);
     }
 
-   
     const nextSparks: Spark[] = [];
     for (const spark of this.sparks) {
       spark.update(dt);
@@ -803,19 +763,13 @@ class ElectricGridEngine {
     }
     this.sparks = nextSparks;
 
-   
     for (const particle of this.particles) particle.update(dt);
     this.particles = this.particles.filter((p) => !p.isDead());
 
-   
     if (this.gridFlashIntensity > 0) {
       this.gridFlashIntensity = Math.max(0, this.gridFlashIntensity - dt * 0.003);
     }
 
-   
-   
-   
-   
     if (this.nowMs - this.lastPruneMs > 4000) {
       for (const [key, node] of this.nodes) {
         if (node.isDim()) this.nodes.delete(key);
@@ -824,7 +778,6 @@ class ElectricGridEngine {
     }
   }
 
-  
 
   setMouse(x: number, y: number, active: boolean): void {
     this.mouse.x = x;
@@ -836,7 +789,6 @@ class ElectricGridEngine {
     this.mouse.active = false;
   }
 
-  
 
   render(): void {
     this.renderer.fadeFrame(this.width, this.height, this.config.trailFadeAlpha);
@@ -863,7 +815,6 @@ class ElectricGridEngine {
 }
 
 
-
 interface ElectricGridProps {
   sparkColor?: string;
 }
@@ -873,10 +824,6 @@ export default function ElectricGrid({ sparkColor = "#00f0ff" }: ElectricGridPro
   const engineRef = useRef<ElectricGridEngine | null>(null);
   const rafRef = useRef<number | null>(null);
   const lastTimeRef = useRef<number>(0);
- 
- 
- 
- 
   const runningRef = useRef(true);
 
   useEffect(() => {
@@ -893,9 +840,6 @@ export default function ElectricGrid({ sparkColor = "#00f0ff" }: ElectricGridPro
     });
 
     const applyCanvasSize = (width: number, height: number): void => {
-     
-     
-     
       const dpr = Math.min(window.devicePixelRatio || 1, MAX_DEVICE_PIXEL_RATIO);
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
@@ -938,11 +882,6 @@ export default function ElectricGrid({ sparkColor = "#00f0ff" }: ElectricGridPro
     canvas.addEventListener("mouseleave", handleMouseLeave);
     canvas.addEventListener("mousedown", handleClick);
 
-   
-   
-   
-   
-   
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let tabVisible = document.visibilityState === "visible";
     let inViewport = true;

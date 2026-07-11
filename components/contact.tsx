@@ -24,8 +24,8 @@ const CONTACT_INFO = [
 ];
 
 const SOCIALS = [
-  { icon: "ti-brand-github", label: "GitHub", href: "https
-  { icon: "ti-brand-linkedin", label: "LinkedIn", href: "https
+  { icon: "ti-brand-github", label: "GitHub", href: "https://github.com/abdulsalamkhan441" },
+  { icon: "ti-brand-linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/abdulsalam-khan-/" },
 ];
 
 export default function ContactSection() {
@@ -66,6 +66,7 @@ export default function ContactSection() {
 
     setStatus("sending");
     try {
+      // Connects directly to our secure API route handler
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -87,9 +88,7 @@ export default function ContactSection() {
   return (
     <>
       <style>{`
-        @import url('https
-
-        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         .ct-root {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -140,7 +139,6 @@ export default function ContactSection() {
           align-items: start;
         }
 
-        
         .ct-left { display: flex; flex-direction: column; gap: 36px; }
 
         .ct-status {
@@ -223,7 +221,6 @@ export default function ContactSection() {
           transform: translateY(-3px);
         }
 
-        
         .ct-form {
           display: flex; flex-direction: column; gap: 20px;
           background: linear-gradient(135deg, #041A53 0%, #030923 60%, #000000 100%);
@@ -329,7 +326,6 @@ export default function ContactSection() {
           border: 0.5px solid var(--clr-grid-line-accent);
         }
 
-        
         @media (max-width: 900px) {
           .ct-cols { grid-template-columns: 1fr; gap: 40px; }
           .ct-glow { width: 340px; height: 340px; }
