@@ -8,7 +8,6 @@ import TestimonialsSection from "@/components/testmonial";
 import ServicesSection from "@/components/services";
 import ContactSection from "@/components/contact";
 import FooterSection from "@/components/footer";
-import ElectricGrid from "@/components/electric";
 import GridLightSweep from "@/components/aurora";
 
 
