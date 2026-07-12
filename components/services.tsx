@@ -72,10 +72,8 @@ export default function ServicesSection() {
   return (
     <>
       <style>{`
-        @import url('https
-
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         
-
         .sv-root {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
           color: var(--color-text);

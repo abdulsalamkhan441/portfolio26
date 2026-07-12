@@ -6,8 +6,8 @@ const CONTACT_INFO = [
   {
     icon: "ti-mail",
     label: "Email",
-    value: "hello@yourname.com",
-    href: "mailto:hello@yourname.com",
+    value: "abdulsalamkhanwbd@gmail.com",
+    href: "mailto:abdulsalamkhanwbd@gmail.com",
   },
   {
     icon: "ti-map-pin",

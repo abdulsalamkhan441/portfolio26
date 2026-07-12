@@ -40,7 +40,7 @@ export default function TestimonialsSection() {
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
 
     targets.forEach((el) => io.observe(el));
@@ -50,9 +50,7 @@ export default function TestimonialsSection() {
   return (
     <>
       <style>{`
-        @import url('https
-
-        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
         .ts-root {
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -222,7 +220,12 @@ export default function TestimonialsSection() {
         }
       `}</style>
 
-      <section ref={sectionRef} className="section-root" id="testimonials" aria-label="Testimonials">
+      <section
+        ref={sectionRef}
+        className="section-root"
+        id="testimonials"
+        aria-label="Testimonials"
+      >
         <div className="global-layout-grid" aria-hidden="true" />
         <div className="section-separator" aria-hidden="true" />
 
@@ -236,20 +239,28 @@ export default function TestimonialsSection() {
               What people <span className="section-title-accent">say</span>
             </h2>
             <p className="ts-sub">
-              A few words from people I&apos;ve worked with directly on real projects.
+              A few words from people I&apos;ve worked with directly on real
+              projects.
             </p>
           </header>
 
           <div className="ts-grid" role="list">
             {TESTIMONIALS.map((t) => (
               <div className="ts-card" key={t.name} role="listitem" data-reveal>
-                <span className="ts-quote-mark" aria-hidden="true">&ldquo;</span>
+                <span className="ts-quote-mark" aria-hidden="true">
+                  &ldquo;
+                </span>
 
                 <p className="ts-quote-text">{t.quote}</p>
 
-                <div className="ts-stars" aria-label={`${t.rating} out of 5 stars`}>
+                <div
+                  className="ts-stars"
+                  aria-label={`${t.rating} out of 5 stars`}
+                >
                   {Array.from({ length: t.rating }).map((_, i) => (
-                    <span className="ts-star" key={i} aria-hidden="true">★</span>
+                    <span className="ts-star" key={i} aria-hidden="true">
+                      ★
+                    </span>
                   ))}
                 </div>
 
@@ -258,7 +269,10 @@ export default function TestimonialsSection() {
                     <img className="ts-avatar" src={t.avatar} alt={t.name} />
                   ) : (
                     <div className="ts-avatar-fallback" aria-hidden="true">
-                      {t.name.split(" ").map((n) => n[0]).join("")}
+                      {t.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
                     </div>
                   )}
                   <div className="ts-person">

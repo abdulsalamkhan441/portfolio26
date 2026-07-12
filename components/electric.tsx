@@ -175,16 +175,16 @@ interface EngineConfig {
 
 const DEFAULT_CONFIG: EngineConfig = {
   branchProbabilities: {
-    straight: 0.45,
-    turnLeft: 0.16,
-    turnRight: 0.16,
-    split: 0.13,
+    straight: 0.5,
+    turnLeft: 0.15,
+    turnRight: 0.15,
+    split: 0.1,
     die: 0.1,
   },
   branchProbabilityGenerationDecay: 0.14,
-  maxSparks: 180,
+  maxSparks: 70,
   maxGeneration: 5,
-  ambientIgnitionChance: 0.045,
+  ambientIgnitionChance: 0.02, // per-frame chance to fire a random node
   rowScanChance: 0.006,
   columnScanChance: 0.006,
   wholeGridFlashChance: 0.0018,
@@ -218,7 +218,7 @@ class GridNode {
   }
 
   update(dtMs: number): void {
-    this.glow = Math.max(0, this.glow - dtMs * 0.0022);
+    this.glow = Math.max(0, this.glow - dtMs * 0.004);
     this.pulsePhase += dtMs * 0.004;
   }
 
@@ -304,8 +304,6 @@ class Spark {
    * midpoint displacement. Re-struck periodically (boltRefreshMs) rather
    * than smoothly animated, which is what real arc discharge looks like. */
   boltPath: Vec2[] = [];
-  private boltRefreshMs = 0;
-
   /** Irregular flicker driven by a clamped random walk with occasional
    * dropouts, instead of a smooth sine wave. */
   private flickerValue = 1;
@@ -395,13 +393,9 @@ class Spark {
     this.flickerValue = clamp(this.flickerValue, 0.35, 1);
     if (Math.random() < 0.02) this.flickerValue = randomRange(0.15, 0.4);
 
-    // Periodic re-strike of the segment geometry.
-    this.boltRefreshMs -= dtMs;
-    if (this.boltRefreshMs <= 0) this.regenerateBoltPath();
-
     const head = this.currentHeadPixel();
-    this.trail.push({ x: head.x, y: head.y, age: 0 });
-    if (this.trail.length > 10) this.trail.shift();
+    this.trail.unshift({ x: head.x, y: head.y, age: 0 });
+    if (this.trail.length > 5) this.trail.pop();
     for (const p of this.trail) p.age += dtMs;
 
     if (this.ttlMs <= 0) this.dead = true;
@@ -508,7 +502,7 @@ class Renderer {
   }
 
   drawNodeGlow(node: GridNode, color: string): void {
-    if (node.isDim()) return;
+    if (node.glow < 0.1) return;
     const pulse = 0.9 + 0.1 * Math.sin(node.pulsePhase);
     const radius = 1.4 + node.glow * 4.2 * pulse;
     const sprite = this.getGlowSprite(color);
@@ -590,7 +584,7 @@ class Renderer {
     for (let i = 1; i < spark.trail.length; i++) {
       const a = spark.trail[i - 1];
       const b = spark.trail[i];
-      const fade = 1 - b.age / 260;
+      const fade = 1 - a.age / 260;
       if (fade <= 0) continue;
       this.ctx.strokeStyle = rgba(rgb, fade * 0.35);
       this.ctx.lineWidth = Math.max(0.2, spark.thickness * fade * 0.8);
@@ -603,6 +597,7 @@ class Renderer {
   }
 
   drawParticle(particle: Particle): void {
+    if (particle.alpha < 0.1) return;
     const rgb = hexToRgb(particle.color);
     this.ctx.fillStyle = rgba(rgb, particle.alpha);
     this.ctx.beginPath();
@@ -633,6 +628,7 @@ class ElectricGridEngine {
   private nodes = new Map<string, GridNode>();
   private sparks: Spark[] = [];
   private particles: Particle[] = [];
+  private activeNodes: GridNode[] = [];
   private config: EngineConfig;
   private color: string;
   private mouse: MouseState = {
@@ -734,8 +730,8 @@ class ElectricGridEngine {
       this.spawnSpark(col, row, a, 1, 1.1);
     }
 
-    this.spawnParticlesAt(node.x, node.y, 12, false);
-    this.spawnParticlesAt(node.x, node.y, 8, true);
+    this.spawnParticlesAt(node.x, node.y, 5, false);
+    this.spawnParticlesAt(node.x, node.y, 3, true);
   }
 
   /** Mouse-hover charging: builds glow at the nearest node; after the
@@ -800,6 +796,11 @@ class ElectricGridEngine {
     const node = this.getNode(spark.targetCol, spark.targetRow);
     node.charge(0.5 + spark.thickness * 0.15);
     this.spawnParticlesAt(node.x, node.y, randomInt(1, 3), false);
+
+    // Add to active nodes for efficient processing
+    if (!this.activeNodes.includes(node)) {
+      this.activeNodes.push(node);
+    }
 
     // Chain reaction: this junction may ignite an independent fresh spark.
     if (Math.random() < this.config.chainReactionChance * 0.3) {
@@ -919,15 +920,21 @@ class ElectricGridEngine {
     this.spawnAmbient();
     this.updateHoverCharge(dt);
 
-    // Nodes — skip fully-decayed nodes instead of touching every node in the
-    // map every frame; a dim node has nothing left to animate until charged.
-    for (const node of this.nodes.values()) {
-      if (!node.isDim()) node.update(dt);
+    // Update only active nodes and prune them if they become dim
+    this.activeNodes = this.activeNodes.filter((node) => {
+      node.update(dt);
+      return !node.isDim();
+    });
+
+    // Cap simultaneous glowing nodes
+    if (this.activeNodes.length > 150) {
+      this.activeNodes.splice(0, this.activeNodes.length - 150);
     }
 
     // Sparks
     const nextSparks: Spark[] = [];
     for (const spark of this.sparks) {
+      if (!this.inBounds(spark.col, spark.row)) continue;
       spark.update(dt);
       if (spark.dead) continue;
       if (spark.hasArrived()) {
@@ -982,8 +989,8 @@ class ElectricGridEngine {
       this.renderer.wholeGridFlash(this.width, this.height, this.gridFlashIntensity, this.color);
     }
 
-    for (const node of this.nodes.values()) {
-      this.renderer.drawNodeGlow(node, this.color);
+    for (const node of this.activeNodes) {
+      if (!node.isDim()) this.renderer.drawNodeGlow(node, this.color);
     }
 
     for (const spark of this.sparks) {

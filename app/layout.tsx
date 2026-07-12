@@ -9,6 +9,8 @@ import ServicesSection from "@/components/services";
 import ContactSection from "@/components/contact";
 import FooterSection from "@/components/footer";
 import ElectricGrid from "@/components/electric";
+import GridLightSweep from "@/components/aurora";
+
 
 export const metadata: Metadata = {
   title: "ASK Portfolio",
@@ -29,7 +31,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col relative isolation:isolate">
-        <ElectricGrid sparkColor="#ffffff" />
+        <GridLightSweep gridSize={48}/>
         <LegalHeroSection />
         <AboutSection/>
         <ExperienceSection/>
