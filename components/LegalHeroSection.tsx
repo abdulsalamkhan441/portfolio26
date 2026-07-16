@@ -930,7 +930,7 @@ export default function HeroSection() {
               <a href="#stky-root" className="hero-btn-primary">
                 Explore My Projects
               </a>
-              <a href="/resume.pdf" download="Abdul_Salam_Resume.docx">
+              <a href="/Abdul_Salam_Resume.docx" download="Abdul_Salam_Resume.docx">
                 <button className="hero-btn-secondary">Download Resume</button>
               </a>
             </div>

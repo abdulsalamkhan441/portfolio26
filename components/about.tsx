@@ -307,7 +307,7 @@ export default function AboutSection() {
                   they&apos;re a habit.
                 </p>
                 <div className="ab-bio-links">
-                  <a href="/resume.pdf" className="ab-btn ab-btn-primary" download="Abdul_Salam_Resume.docx">
+                  <a href="/Abdul_Salam_Resume.docx" className="ab-btn ab-btn-primary" download="Abdul_Salam_Resume.docx">
                     Download Resume
                   </a>
                   <a href="#stky-root" className="ab-btn ab-btn-ghost">
